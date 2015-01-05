@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<template-instance>
+   <template-type>org/alfresco/document-version-details</template-type>
+   <properties>
+      <pageFamily>documentlibrary</pageFamily>
+      <container>documentLibrary</container>
+   </properties>
+   <components>
+
+      <!-- Mobile App Launch -->
+      <component>
+         <region-id>mobile-app</region-id>
+         <sub-components>
+            <sub-component id="default">
+               <evaluations>
+                  <!-- if User Agent matches: iPad, iPhone, iPod -->
+                  <evaluation id="useragent">
+                     <evaluators>
+                        <evaluator type="useragent.component.evaluator">
+                           <params>
+                              <useragent>iPhone|iPod|iPad</useragent>
+                           </params>
+                        </evaluator>
+                     </evaluators>
+                     <url>/components/mobile-app-support/ios-mobile</url>
+                  </evaluation>
+               </evaluations>
+            </sub-component>
+         </sub-components>
+      </component>
+
+      <!-- Title -->
+      <component>
+         <region-id>title</region-id>
+         <sub-components>
+            <sub-component id="default">
+               <evaluations>
+                  <!-- if in site: Site title -->
+                  <evaluation id="site">
+                     <evaluators>
+                        <evaluator type="site.component.evaluator"/>
+                     </evaluators>
+                     <url>/components/title/collaboration-title</url>
+                  </evaluation>
+                  <!-- otherwise: Repository title -->
+                  <evaluation id="repo">
+                     <url>/components/title/simple-title</url>
+                     <properties>
+                        <title>title.repository</title>
+                        <subtitle>title.browser</subtitle>
+                     </properties>
+                  </evaluation>
+               </evaluations>
+            </sub-component>
+         </sub-components>
+      </component>
+
+      <!-- Site Navigation -->
+      <component>
+         <region-id>navigation</region-id>
+         <sub-components>
+            <sub-component id="default">
+               <evaluations>
+                  <!-- if in site: Site navigation -->
+                  <evaluation id="site">
+                     <evaluators>
+                        <evaluator type="site.component.evaluator"/>
+                     </evaluators>
+                     <url>/components/navigation/collaboration-navigation</url>
+                  </evaluation>
+               </evaluations>
+            </sub-component>
+         </sub-components>
+      </component>
+
+      <!-- Document Header -->
+      <component>
+         <region-id>node-header</region-id>
+         <sub-components>
+            <sub-component id="default">
+               <evaluations>
+                  <!-- if in site: Site header -->
+                  <evaluation id="site">
+                     <evaluators>
+                        <evaluator type="site.component.evaluator"/>
+                     </evaluators>
+                     <url>/components/node-details/node-header</url>
+                     <properties>
+                        <nodeRef>{nodeRef}</nodeRef>
+                        <rootPage>documentlibrary</rootPage>
+                        <rootLabelId>path.documents</rootLabelId>
+                     </properties>
+                  </evaluation>
+                  
+                  <!-- Check the page context using the "pagecontext" component evaluator
+                       for access from either the "My Files" or "Shared Files" contexts. (the
+                       page context is set via a URL token and the context allows the library
+                       root to be set so that the document path is displayed correctly) -->
+                  <evaluation id="myfiles">
+                     <evaluators>
+                        <evaluator type="pagecontext.component.evaluator">
+                           <params>
+                              <pagecontext>mine</pagecontext>
+                           </params>
+                        </evaluator>
+                     </evaluators>
+                     <url>/components/node-details/node-header</url>
+                     <properties>
+                        <nodeRef>{nodeRef}</nodeRef>
+                        <libraryRoot>alfresco://user/home</libraryRoot>
+                        <rootPage>context/mine/myfiles</rootPage>
+                        <rootLabelId>location.path.myfiles</rootLabelId>
+                     </properties>
+                  </evaluation>
+                  
+                  <!-- otherwise: Repo header -->
+                  <evaluation id="repo">
+                     <url>/components/node-details/node-header</url>
+                     <properties>
+                        <nodeRef>{nodeRef}</nodeRef>
+                        <rootPage>repository</rootPage>
+                        <rootLabelId>path.repository</rootLabelId>
+                     </properties>
+                  </evaluation>
+               </evaluations>
+            </sub-component>
+         </sub-components>
+      </component>
+
+      <!-- WebPreview -->
+      <component>
+         <region-id>web-preview</region-id>
+         <sub-components>
+            <sub-component id="default">
+               <evaluations>
+                  <evaluation>
+                     <evaluators>
+                        <evaluator type="config.component.evaluator">
+                           <params>
+                              <element>DocumentDetails/document-details/display-web-preview</element>
+                           </params>
+                        </evaluator>
+                     </evaluators>
+                     <url>/components/preview/web-preview</url>
+                     <properties>
+                        <nodeRef>{nodeRef}</nodeRef>
+                        <api>api</api>
+                        <proxy>alfresco</proxy>
+                        <dependencyGroup>document-details</dependencyGroup>
+                     </properties>
+                  </evaluation>
+               </evaluations>
+            </sub-component>
+         </sub-components>
+      </component>
+
+      <!-- Document Metadata -->
+      <component>
+         <region-id>document-metadata</region-id>
+         <url>/components/document-details/document-metadata</url>
+         <properties>
+            <nodeRef>{nodeRef}</nodeRef>
+         </properties>
+      </component>
+
+   </components>
+</template-instance>

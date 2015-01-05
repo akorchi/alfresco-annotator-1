@@ -1,0 +1,10 @@
+.document-versions .actions
+{
+   width: 7em;
+}
+
+.document-versions .actions a.versionDetails 
+{
+	background-image: url(images/document-view-oldversion-16.png);
+	margin-left: 0.5em;
+}

@@ -1,0 +1,19 @@
+<extension>
+	<modules>
+		<module>
+			<id>Version Details</id>
+			<components>
+				<component>
+					<region-id>document-versions</region-id>
+					<source-id>document-details</source-id>
+					<scope>template</scope>
+					<sub-components>
+						<sub-component id="VersionDetails" index="75">
+							<url>/fr/starxpert/versiondetails</url>
+						</sub-component>
+					</sub-components>
+				</component>
+			</components>
+		</module>
+	</modules>
+</extension>
