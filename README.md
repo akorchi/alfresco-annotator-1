@@ -9,3 +9,5 @@ Alfresco Annotator allows to add/ view / edit annotation for any document on Sha
 The module integrate somme additionals packages from mediaViwers and it allows to display documents(PDF,DOCX,ODT...) with html mediaviewer module.
 
 Annotations are not stored on the document, but on Alfresco database and we can see them on share interface.
+
+GNU LESSER GENERAL PUBLIC LICENSE : Version 3, 29 June 2007
